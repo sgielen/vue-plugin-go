@@ -1,0 +1,7 @@
+MyComponent.go
+MyComponent.template.js
+MyComponent.wasm
+MyComponentStyle.css
+node_modules
+wasm_exec.js
+

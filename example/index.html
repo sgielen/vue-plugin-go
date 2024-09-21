@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue 3 Component Example</title>
+  <link rel="stylesheet" href="./MyComponentStyle.css" />
+  <script src="wasm_exec.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Import map to tell the browser where to load "vue" from -->
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { createVNode, render } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+    import MyComponent from './MyComponent.js';
+    import * as Vue from 'vue';
+
+    window.Vue = Vue
+    const go = new Go();
+    await WebAssembly.instantiateStreaming(fetch("MyComponent.wasm"), go.importObject).then((result) => {
+        go.run(result.instance);
+    });
+
+    const vnode = createVNode(MyComponent, {});
+    const appContainer = document.getElementById('app');
+    const l = render(vnode, appContainer);
+  </script>
+</body>
+</html>
